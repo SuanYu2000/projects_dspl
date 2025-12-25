@@ -31,12 +31,15 @@ One can generate equidistributed prototypes with desired dimension:
 ```bash
   python Prototype_Estimation.py --seed 100 --num_centroids 100 --batch_size 100 --space_dim 50 --num_epoch 1000
 ```
+**Open Set Recognition**
 
 To train open set recognition models in paper, run this command:
 
 ```bash
 python osr_DSPL.py --dataset <DATASET> --loss DSPLoss
 ```
+
+**Closed Set Classification**
 
 To train closed set classifier models in paper, run this command:
 
