@@ -8,7 +8,7 @@
 
 Traditional pattern recognition assumes a constant category set during training. In practical applications, unlabeled data often includes a large number of samples from unknown classes. Open-Set Recognition (OSR) addresses the challenge by constructing a realistic evaluation scenario, in which classifiers must correctly classify known classes and reliably recognize unknown class samples. This work proposes an open-set recognition model based on dynamically scaled hyperspherical prototypes, built upon the hyperspherical prototype network. The model employs a virtual-sample generation strategy to extend the hyperspherical prototype network, enabling class prototypes to be assigned to each known class and each potential unknown class. While sample recognition is performed using the angle similarity between samples and class prototypes, a new mechanism leveraging the norms of class prototypes is proposed, effectively improving discriminative accuracy. Extensive experiments on multiple benchmark datasets demonstrate that the proposed model achieves superior performance in both open-set and closed-set evaluations.
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![DSPL Framework](figs/dspl_1225.png)
 Hyperspherical Prototype Construction builds an extended candidate prototype set of size 
 𝐾+𝑀, where virtual class samples are introduced via a Mixup strategy to model potential unknown categories. The Label-to-Prototype Assignment process is then employed to determine the optimal correspondence between class labels and candidate prototypes. For illustration, an example with four classes is shown in the figure, where the change in the ordering of color blocks reflects the update of the label–prototype matching relationship. Furthermore, the Adaptive Prototype Scaling Mechanism highlights the difference between the proposed approach and conventional hyperspherical methods that adopt fixed prototype magnitudes. In this stage, variations in the lengths of the color blocks indicate the adaptive adjustment of prototype magnitudes during training.
 ## Requirements
@@ -51,7 +51,7 @@ python acc_DSPL.py --dataset <DATASET> --loss DSPLoss
 
 Comparison of AUROC and OSCR curves on CIFAR-100 and ImageNet-200 across training epochs.
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![DSPL Framework](figs/auroc_oscr.png)
 
 
 The AUROC Results of on Detecting Known and Unknown Samples.
