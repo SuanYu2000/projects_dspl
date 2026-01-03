@@ -115,7 +115,7 @@ def main_worker(options):
         file_name = '{}_{}_{}'.format(options['model'], options['loss'], options['cs'])
 
     # ----------------------
-    # 记录每轮精度
+    
     acc_list = []
     # ----------------------
 
@@ -144,7 +144,7 @@ def main_worker(options):
 
         train(net, criterion, optimizer, trainloader, epoch=epoch, **options)
 
-        # 更新匹配关系
+        
         # if epoch % 10 == 0:
         #     criterion.Dist.update_matching()
 
@@ -152,7 +152,7 @@ def main_worker(options):
             print("==> Test", options['loss'])
             results = test_cls(net, criterion, testloader, epoch=epoch, **options)
             acc = results['ACC']
-            acc_list.append(acc)  # 保存本轮精度
+            acc_list.append(acc)  
             print("Acc (%): {:.3f}".format(acc))
             save_networks(net, model_path, file_name, criterion=criterion)
 
@@ -164,7 +164,7 @@ def main_worker(options):
     print("Finished. Total elapsed time (h:m:s): {}".format(elapsed))
 
     # ----------------------
-    # 保存最高精度
+
     best_acc = max(acc_list) if len(acc_list) > 0 else 0
     results['best_ACC'] = best_acc
     print("Best Acc (%): {:.3f}".format(best_acc))
@@ -183,7 +183,7 @@ if __name__ == '__main__':
     options['img_size'] = img_size
     results = dict()
 
-    # 直接一次完整训练，不再进行 known/unknown 划分
+    
     time_str = datetime.datetime.now().strftime("%m%d_%H%M")
 
     if options['dataset'] == 'cifar100':
@@ -196,22 +196,23 @@ if __name__ == '__main__':
     if not os.path.exists(dir_path):
         os.makedirs(dir_path)
 
-    # ✅ 只调用一次
+    
     res, acc_list = main_worker(options)
     results['final'] = res
     results['best_ACC'] = res['best_ACC']
 
-    # DataFrame 1: 最终结果（final + best）
+    # DataFrame 1: （final + best）
     df1 = pd.DataFrame([results])
 
-    # DataFrame 2: 每轮精度
+    # DataFrame 2: 
     df2 = pd.DataFrame({
         'epoch': list(range(1, len(acc_list) + 1)),
         'ACC': acc_list
     })
 
-    # 合并（上下拼接，index 不重叠）
+    
     df = pd.concat([df1, df2], axis=0, ignore_index=True)
     df.to_csv(os.path.join(dir_path, file_name), index=False)
+
 
 
