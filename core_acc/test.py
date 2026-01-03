@@ -114,19 +114,19 @@ def test_per_class(net, criterion, testloader, save_path="per_class_acc.csv", ep
                 if pred.item() == label:
                     correct_per_class[label] = correct_per_class.get(label, 0) + 1
 
-    # 计算每类精度并排序
+    
     per_class_acc = {}
     for cls in sorted(total_per_class.keys()):
         acc = 100.0 * correct_per_class.get(cls, 0) / total_per_class[cls]
-        per_class_acc[cls] = round(acc, 2)  # 保留两位小数
+        per_class_acc[cls] = round(acc, 2) 
 
-    # 打印结果
+   
     print("Per-class Accuracy:")
     for cls, acc in per_class_acc.items():
         cls_name = testloader.dataset.classes[cls] if num_classes is not None else ""
         print(f"Class {cls} ({cls_name}): {acc:.2f}%")
 
-    # 保存到 CSV
+    
     os.makedirs(os.path.dirname(save_path), exist_ok=True)
     with open(save_path, mode='w', newline='') as f:
         writer = csv.writer(f)
