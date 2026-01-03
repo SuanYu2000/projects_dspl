@@ -44,7 +44,6 @@
 #
 #
 # def metric_ood(x1, x2, stypes=['Bas'], verbose=True):
-#     # 如果已经是 Tensor（通常是），那就直接用：
 #     x1 = x1.to('cuda') if torch.cuda.is_available() else x1.to('cpu')
 #     x2 = x2.to(x1.device)
 #
