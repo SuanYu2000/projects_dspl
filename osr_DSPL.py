@@ -181,7 +181,7 @@ def main_worker(options):
 
         train(net, criterion, optimizer, trainloader, epoch=epoch, **options)
 
-        # 更新匹配关系
+        
         if epoch % 10 == 0:
             criterion.Dist.update_matching()
 
@@ -195,8 +195,7 @@ def main_worker(options):
 
         if options['stepsize'] > 0: scheduler.step()
 
-        # 假设 criterion 是 MARLoss_2 实例
-        # 假设 queue 是每类的 mean feature，P 是候选原型方向（来自 DL2Module）
+    
 
 
 
