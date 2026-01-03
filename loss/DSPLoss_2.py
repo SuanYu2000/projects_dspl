@@ -21,14 +21,14 @@ class DSPLoss_2(nn.CrossEntropyLoss):
 
     def forward(self, x, y, labels=None):
 
-        # 动态获取最新中心（方向 × 模长）
+        
         centers = self.Dist.get_scaled_centers()
 
-        # 计算两个距离分支
+        
         dist_dot_p = self.Dist(x, center=centers, metric='dot')
         dist_l2_p = self.Dist(x, center=centers, metric='l2')
 
-        # 差值作为 logits
+        
         logits = dist_l2_p - dist_dot_p
 
         if labels is None:
@@ -36,10 +36,10 @@ class DSPLoss_2(nn.CrossEntropyLoss):
 
         # self.Dist.update_queue(x, labels)
 
-        # 交叉熵 loss
+        
         loss = F.cross_entropy(logits / self.temp, labels)
 
-        # 正则项：距离当前样本到其中心的欧式距离
+        
         center_batch = centers[labels, :]
         _dis_known = (x - center_batch).pow(2).mean(1)
         target = torch.ones_like(_dis_known).to(x.device)
