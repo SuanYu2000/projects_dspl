@@ -36,31 +36,4 @@ class Dist_DSPL(nn.Module):
         else:
             return features.matmul(center.t())
 
-    # def update_queue(self, features, labels):
-    #     features = F.normalize(features.to(self.device), p=2, dim=1)
-    #     labels = labels.to(self.device)
-    #
-    #     for cls in labels.unique():
-    #         cls_feat = features[labels == cls]
-    #         self.queue[cls] = 0.9 * self.queue[cls] + 0.1 * cls_feat.mean(dim=0)
-    #     self.queue = F.normalize(self.queue, p=2, dim=1)
-
-
-    # @torch.no_grad()
-    # def update_matching(self):
-    #     # 计算相似度矩阵（点积）
-    #     # print("queue device:", self.queue.device)
-    #     # print("polars device:", self.polars.device)
-    #
-    #     score = torch.mm(self.queue, self.directions.t())  # 注意这里添加了 .t() 转置操作
-    #
-    #     # 使用匈牙利算法找到最优匹配
-    #     row_ind, col_ind = linear_sum_assignment(-score.cpu().detach().numpy())
-    #     self.matching_indices = torch.tensor(col_ind, dtype=torch.long, device=self.device)
-    #
-    #     # 更新极坐标
-    #     old_polars = self.polars.clone()
-    #     for i, j in enumerate(self.matching_indices):
-    #         self.polars[:, i] = old_polars[:, j]
-    #
-    #     print(f"[Matching Update] Indices: {self.matching_indices}...")
+   
