@@ -8,7 +8,7 @@ def train(net, criterion, optimizer, trainloader, epoch=None, **options):
     net.train()
     losses = AverageMeter()
 
-    torch.cuda.empty_cache()  # 释放未使用的GPU显存，防止内存溢出
+    torch.cuda.empty_cache()  
 
     loss_all = 0
     for batch_idx, (data, labels) in enumerate(trainloader):
