@@ -101,8 +101,8 @@ class ResNet(nn.Module):
         x = self.avgpool(x)
         x = torch.flatten(x, 1)
 
-        feat = self.proj(x)            # 投影后的嵌入向量
-        logits = self.classifier(feat) # 分类结果
+        feat = self.proj(x)            
+        logits = self.classifier(feat)
 
         if return_feat:
             return feat, logits
