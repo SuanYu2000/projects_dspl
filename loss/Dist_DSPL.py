@@ -48,17 +48,17 @@ class Dist_DSPL(nn.Module):
 
     @torch.no_grad()
     def update_matching(self):
-        # 计算相似度矩阵（点积）
+        
         # print("queue device:", self.queue.device)
         # print("polars device:", self.polars.device)
 
-        score = torch.mm(self.queue, self.directions.t())  # 注意这里添加了 .t() 转置操作
+        score = torch.mm(self.queue, self.directions.t())  
 
-        # 使用匈牙利算法找到最优匹配
+        
         row_ind, col_ind = linear_sum_assignment(-score.cpu().detach().numpy())
         self.matching_indices = torch.tensor(col_ind, dtype=torch.long, device=self.device)
 
-        # 更新极坐标
+        
         old_polars = self.polars.clone()
         for i, j in enumerate(self.matching_indices):
             self.polars[:, i] = old_polars[:, j]
